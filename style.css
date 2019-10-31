@@ -1,0 +1,62 @@
+body {
+    background-color : rgb(251, 228, 152);
+    font: italic;
+    margin:0%;
+    padding:1% 2%;
+}
+
+header {
+    /* padding: 1px 1px; */
+    display: flex;
+   
+}
+
+#h1 {
+    /* display: flex;
+    position: relative; */
+    margin: 0px;
+    padding: 10px 10px;
+    width: 470px;
+    height: 20px;
+    color: black;
+    font-size: 17px;
+    outline: none; 
+    border-radius: 9px;
+    border: 1px ;
+    box-shadow: 0 0 3px grey;
+}
+
+ ul * {
+    display: flex;
+    padding: 5px 0px;
+    width: 470px;
+    height: 10px;
+    color:black;
+    font-size: 13px;
+    outline: none; 
+    border-radius: 5px;
+    border: 0px ;
+    box-shadow: 0  2px grey;
+}
+li * {
+
+    padding: 0%;
+    margin: 0%;
+}
+ul  {
+    padding: 0px 0px;
+    border:0px 0px;
+    list-style-type: none;
+   }
+
+li input {
+    display: none;
+}
+
+li.edit span {
+    display: none;
+}
+
+li.edit input {
+    display: initial;
+}
