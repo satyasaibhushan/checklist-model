@@ -39,9 +39,12 @@ function itemKeypress(event) {
     if (event.which === 13  ) {
         if(this.value !="")
         focus.call(this);
-        else if(this.id.charAt(2) != (i) && this.value =="")
-        {focus.call(this);
-            i--;
+        else if(this.id.charAt(2) != (i-1) && this.value =="")
+        {   console.log(i);
+            console.log(this.id.charAt(2));
+           // i--;
+            focus.call(this);
+           
         }
     }
     
@@ -100,6 +103,7 @@ function addli(a,a1,q){
     if(a1==1 && a==0){  
       
       var y1="li"+(q);
+      var s=document.getElementById(y1).nextSibling;
       var y=document.getElementById(y1);
      // console.log(y1);
       list.removeChild(y);
@@ -111,6 +115,16 @@ function addli(a,a1,q){
      y.removeEventListener("click",hi );
      y.removeEventListener("blur", hi);
      y.removeEventListener("keypress",hi );
+     var s1=[];
+     for(var d=0;d<i-q;d++)
+     {var j=s.id;
+        var sd = s.id.charAt(2);
+        var sdd= parseInt(sd) +1;
+        console.log(j);
+       s.id = "li"+(sd-1);
+       s=document.getElementById("li"+sdd); 
+     }
+
       }
     
     b="li"+(i)
@@ -121,13 +135,13 @@ function addli(a,a1,q){
 
 function addel(){
    // console.log(this.value);
-    if(this.id.charAt(2) == (i-1) && this.value !="")
+    if(this.id.charAt(2) == (i) && this.value !="")
     {//console.log("hi")
         addli(1,1);
     }
 }
 function remel(){
-   // console.log("doubt");
+    console.log(this);
     if(this.value == "" && this.id.charAt(2) != (i-1))
     {//console.log("n odoubt");
     var z = this.id.charAt(2);
