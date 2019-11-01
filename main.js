@@ -34,11 +34,15 @@ function itemKeypress(event) {
         if(this.id.charAt(2) == (i-1) && this.value != '' )
         {//console.log("hi")
             addli(1,1);
+           var d1 = "la"+this.id.charAt(2);
+           var df1 = document.getElementById(d1);
+            icon.call(df1);
         }
      }
     if (event.which === 13  ) {
-        if(this.value !="")
-        focus.call(this);
+        if(this.value !=""){
+        focus.call(this);}
+        
         else if(this.id.charAt(2) != (i-1) && this.value =="")
         {   console.log(i);
             console.log(this.id.charAt(2));
@@ -81,21 +85,27 @@ function listrem(){
 function addli(a,a1,q){
     if(a==1 ){
     var x= document.createElement("input");
+    var e= document.createElement("icon");
+    var linebreak = document.createElement("br");
     x.type = "text";
-    x.className = "edit";  // set the CSS class
+    x.className = "new";  // set the CSS class
     x.placeholder= "list item";
     x.id="li"+i;
+    e.className ="fas fa-plus";
+    e.id="la"+i;
     // list.appendChild(ins.x);
     //var ins = document.createElement("li");
     //addl(ins,x)
-    list.appendChild(x);
+    list.appendChild(e);
+    e.insertAdjacentElement("afterend", x);
+    list.appendChild(linebreak);
     //console.log(x);
     console.log("werty");
     i++;
      x.addEventListener("click",addel);
      x.addEventListener("blur",remel);
      x.addEventListener("keypress", itemKeypress);
-    
+     e.addEventListener("click",ican);
     } 
     if(a==0 && a1==0 ){
     list.removeChild(list.childNodes[1]);    
@@ -103,9 +113,16 @@ function addli(a,a1,q){
     if(a1==1 && a==0){  
       
       var y1="li"+(q);
-      var s=document.getElementById(y1).nextSibling;
+      var y11="la"+(q);
+      var s=document.getElementById(y1).nextSibling.nextSibling.nextSibling;
+      console.log(s);
       var y=document.getElementById(y1);
+      var y01=document.getElementById(y1).nextSibling;
+      var y02=document.getElementById(y1).previousSibling;
+      var z1 = document.getElementById(y11).nextSibling.nextSibling.nextSibling;
      // console.log(y1);
+      list.removeChild(y02);
+      list.removeChild(y01);
       list.removeChild(y);
      // console.log(i);
       i--;
@@ -124,7 +141,14 @@ function addli(a,a1,q){
        s.id = "li"+(sd-1);
        s=document.getElementById("li"+sdd); 
      }
-
+     for(var d=0;d<i-q;d++)
+     {var j=z1.id;
+        var sd = z1.id.charAt(2);
+        var sdd= parseInt(sd) +1;
+        console.log(j);
+       z1.id = "la"+(sd-1);
+       z1=document.getElementById("la"+sdd); 
+     }
       }
     
     b="li"+(i)
@@ -151,6 +175,40 @@ function remel(){
 function hi(){
 console.log("removeddddd")
 }
+function icon(){
+    var d = "li"+this.id.charAt(2);
+    df = document.getElementById(d);
+    console.log(df.value);
+    if (df.value != "") {
+       //this.className = "far fa-check-square";
+       this.className ="far fa-square";
+       df.className = "le";
+
+    }
+    // if (df.value =="")
+    // {
+    //     focus.call(df);
+    //     this.className = "fa-plus-square";
+    // }
+    
+}
+function ican(){
+    var d = "li"+this.id.charAt(2);
+    df = document.getElementById(d);
+    console.log(this.className);
+    if (this.className == "far fa-check-square") {
+       //this.className = "far fa-check-square";
+     this.className ="far fa-square";
+     df.className = "le";
+    }
+    else if (this.className =="far fa-square")
+    {
+        this.className = "far fa-check-square";
+        df.className = "lc";
+    }
+    
+}
+
 // function addl(ins,x){
     
 //     list.appendChild(x);
