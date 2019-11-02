@@ -19,7 +19,7 @@ header {
     width: 470px;
     height: 20px;
     color: black;
-    font-size: 17px;
+    font-size: 20px;
     outline: none; 
     border-radius: 9px;
     border: 1px ;
@@ -29,16 +29,23 @@ header {
  input  {
     
     /* display: block; */
-    padding: 5px 0px;
+    padding: 4.5px 0px;
+    /* background-color: white; */
+    
     width: 470px;
     height: 10px;
     color:black;
-    font-size: 13px;
+    font-size: 16px;
     outline: none; 
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border: 0px ;
-    box-shadow: 0  2px grey;
+    box-shadow: 0  1px white;
 }
+input.foc{
+    /* box-shadow: 0  1px black; */
+    background-color:grey;
+}
+   
 * input::before { 
     content: "\A"; 
     white-space: pre-line; 
@@ -51,17 +58,35 @@ li * {
     /* float: left; */
 }
 ul  {
+    /* background-color: white; */
     padding: 0px 0px;
     border:0px 0px;
     list-style-type: none;
    }
-
+br{
+    background-color: white;
+}
 * icon {
     display: inline-block;
+    background-color: white;
+    padding: 1px 2px;
+   /* height: 20px; */
+   box-shadow: 0  2px white;
 }
 * input.lc{
     text-decoration: line-through;
 }
+
+button {
+    background-color: rgb(100, 175, 224); /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
 /* li input {
     display: none;
 }

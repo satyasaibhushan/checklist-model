@@ -3,11 +3,12 @@ var li = [];
 var title = document.getElementById("h1");
 var list = document.getElementById("UL");
 var inputs = list.querySelectorAll("input");
+var btn= document.getElementById("sort");
 // li.length=1;
 
 var b = "li"+(i);
 li[0] = list.childNodes[1];
-
+btn.addEventListener("click",ap);
 title.addEventListener("click",addtitle);
 title.addEventListener("blur",notitle);
 title.addEventListener("keypress", itemKeypress);
@@ -31,8 +32,12 @@ function itemKeypress(event) {
     // console.log("hi");
     if (this.id!="h1")
      {//console.log(this.value);
+       this.className="foc";
+        console.log("hi");
+        console.log(this.className);
         if(this.id.charAt(2) == (i-1) && this.value != '' )
-        {//console.log("hi")
+        {console.log("hi")
+         console.log(this.className);
             addli(1,1);
            var d1 = "la"+this.id.charAt(2);
            var df1 = document.getElementById(d1);
@@ -41,7 +46,14 @@ function itemKeypress(event) {
      }
     if (event.which === 13  ) {
         if(this.value !=""){
-        focus.call(this);}
+        focus.call(this);
+        if(i!=1){
+        var z = this.id.charAt(2);
+      //  var zw = document.getElementById("ln"+z);
+        this.className="uc";
+     //   zw.className="nu";
+        }
+    }
         
         else if(this.id.charAt(2) != (i-1) && this.value =="")
         {   console.log(i);
@@ -51,8 +63,14 @@ function itemKeypress(event) {
            
         }
     }
-    
-  }
+    if ((event.which === 8 || event.which === 46 )&& this.value=="")
+    { console.log("hwelooooo");
+        var z = this.id.charAt(2);
+     addli(0,1,z)
+    }
+ }
+
+
 function listadd(){
   
     title.placeholder = "Title";
@@ -77,7 +95,7 @@ function focus(){
   
  }
 function listrem(){
-    addli(0,0);
+    addli(0,0,0);
     title.placeholder = "Take a note...";
 }
 
@@ -86,6 +104,7 @@ function addli(a,a1,q){
     if(a==1 ){
     var x= document.createElement("input");
     var e= document.createElement("icon");
+    var n= document.createElement("icon");
     var linebreak = document.createElement("br");
     x.type = "text";
     x.className = "new";  // set the CSS class
@@ -93,37 +112,54 @@ function addli(a,a1,q){
     x.id="li"+i;
     e.className ="fas fa-plus";
     e.id="la"+i;
+    n.id="ln"+i;
+    n.className="far fa-times-circle"
     // list.appendChild(ins.x);
     //var ins = document.createElement("li");
     //addl(ins,x)
     list.appendChild(e);
     e.insertAdjacentElement("afterend", x);
+    list.appendChild(n);
     list.appendChild(linebreak);
     //console.log(x);
     console.log("werty");
     i++;
      x.addEventListener("click",addel);
+     x.addEventListener("focus",high);
      x.addEventListener("blur",remel);
      x.addEventListener("keypress", itemKeypress);
      e.addEventListener("click",ican);
+     n.addEventListener("click",remm)
     } 
     if(a==0 && a1==0 ){
-    list.removeChild(list.childNodes[1]);    
-    i--;}
-    if(a1==1 && a==0){  
+    var y1="li"+(q);
+    var y=document.getElementById(y1);  
+       y.removeEventListener("click",hi );
+       y.removeEventListener("blur", hi);
+       y.removeEventListener("keypress",hi );
+     for (let sa = 1; sa < 5; sa++) {
+        list.removeChild(list.childNodes[4*q+1]); 
+        }
+        i--;
+    }
+    if(a1==1&& a==0){  
       
       var y1="li"+(q);
       var y11="la"+(q);
-      var s=document.getElementById(y1).nextSibling.nextSibling.nextSibling;
+      var y12="ln"+(q);
+      var s=document.getElementById(y1).nextSibling.nextSibling.nextSibling.nextSibling;
       console.log(s);
       var y=document.getElementById(y1);
       var y01=document.getElementById(y1).nextSibling;
       var y02=document.getElementById(y1).previousSibling;
-      var z1 = document.getElementById(y11).nextSibling.nextSibling.nextSibling;
-     // console.log(y1);
+      var y03=document.getElementById(y1).nextSibling.nextSibling;
+      var z3= document.getElementById(y12).nextSibling.nextSibling.nextSibling.nextSibling;
+      var z1 =document.getElementById(y11).nextSibling.nextSibling.nextSibling.nextSibling;
+      console.log(y03);
       list.removeChild(y02);
       list.removeChild(y01);
       list.removeChild(y);
+      list.removeChild(y03);
      // console.log(i);
       i--;
      console.log("removed");
@@ -132,6 +168,7 @@ function addli(a,a1,q){
      y.removeEventListener("click",hi );
      y.removeEventListener("blur", hi);
      y.removeEventListener("keypress",hi );
+     y03.removeEventListener("click",hi);
      var s1=[];
      for(var d=0;d<i-q;d++)
      {var j=s.id;
@@ -149,6 +186,14 @@ function addli(a,a1,q){
        z1.id = "la"+(sd-1);
        z1=document.getElementById("la"+sdd); 
      }
+     for(var d=0;d<i-q;d++)
+     {var j=z3.id;
+        var sd = z3.id.charAt(2);
+        var sdd= parseInt(sd) +1;
+        console.log(j);
+       z3.id = "ln"+(sd-1);
+       z3=document.getElementById("ln"+sdd); 
+     }
       }
     
     b="li"+(i)
@@ -159,13 +204,16 @@ function addli(a,a1,q){
 
 function addel(){
    // console.log(this.value);
+  this.className="foc";
     if(this.id.charAt(2) == (i) && this.value !="")
     {//console.log("hi")
+       // this.className="foc";
         addli(1,1);
     }
 }
 function remel(){
     console.log(this);
+    this.className="uc";
     if(this.value == "" && this.id.charAt(2) != (i-1))
     {//console.log("n odoubt");
     var z = this.id.charAt(2);
@@ -209,6 +257,61 @@ function ican(){
     
 }
 
+function high(){
+    var z = this.id.charAt(2);
+    var zw = document.getElementById("ln"+z);
+    if(this.value !="")
+    {//zw.className="foc";
+    zw.display = "initial";
+    console.log(zw)
+    
+    }
+}
+function remm(){
+    var z= this.id.charAt(2);
+    if(z!=i-1)
+    addli(0,1,z);
+   if(z==i-1 && z!=0)
+   addli(0,0,z);
+   if(z==0){
+    for (let sa = 1; sa < 5; sa++) {
+      list.removeChild(list.childNodes[sa]); 
+     }
+  }
+}
+function swap(a,b){
+    var aa1=list.childNodes[4*a+1].className;
+    var aa2=list.childNodes[4*a+2].value;
+    var aa3=list.childNodes[4*a+2].className;
+    list.childNodes[4*a+2].value = list.childNodes[4*b+2].value;
+    list.childNodes[4*b+2].value = aa2;
+    list.childNodes[4*a+1].className = list.childNodes[4*b+1].className;
+    list.childNodes[4*b+1].className = aa1;
+    list.childNodes[4*a+2].className = list.childNodes[4*b+2].className;
+    list.childNodes[4*b+2].className = aa3;
+    console.log(list.childNodes[4*b+2].className);
+
+}
+function ap() {
+   var last="li"+(i-1);
+   if(i!=0)
+   if(document.getElementById(last).value == "")
+       addli(0,0,i-1);
+       console.log("hi");
+     
+    for (let a = 0; a < i-1; a++) {
+        for (let b = 0; b < i-a-1; b++) {
+            var c=document.getElementById("li"+b).className
+            var d=document.getElementById("li"+(b+1)).className
+            if(c=="lc" && d!="lc")
+              {swap(b,b+1);}
+            
+        }
+        
+    }   
+
+
+ }      
 // function addl(ins,x){
     
 //     list.appendChild(x);
