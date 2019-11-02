@@ -1,9 +1,12 @@
 var i=0;
+var btnn=1;
 var li = [];
 var title = document.getElementById("h1");
 var list = document.getElementById("UL");
 var inputs = list.querySelectorAll("input");
-var btn= document.getElementById("sort");
+var slider = document.getElementById("off");
+console.log(slider);
+var btn= document.getElementById("onn");
 // li.length=1;
 
 var b = "li"+(i);
@@ -12,6 +15,7 @@ btn.addEventListener("click",ap);
 title.addEventListener("click",addtitle);
 title.addEventListener("blur",notitle);
 title.addEventListener("keypress", itemKeypress);
+slider.addEventListener("click",slid);
 
 
 function addtitle(){
@@ -32,7 +36,7 @@ function itemKeypress(event) {
     // console.log("hi");
     if (this.id!="h1")
      {//console.log(this.value);
-       this.className="foc";
+        this.setAttribute("style","background-color:grey");
         console.log("hi");
         console.log(this.className);
         if(this.id.charAt(2) == (i-1) && this.value != '' )
@@ -50,7 +54,7 @@ function itemKeypress(event) {
         if(i!=1){
         var z = this.id.charAt(2);
       //  var zw = document.getElementById("ln"+z);
-        this.className="uc";
+      //  this.className="uc";
      //   zw.className="nu";
         }
     }
@@ -109,10 +113,10 @@ function addli(a,a1,q){
     x.type = "text";
     x.className = "new";  // set the CSS class
     x.placeholder= "list item";
-    x.id="li"+i;
+    x.id="li"+(i);
     e.className ="fas fa-plus";
-    e.id="la"+i;
-    n.id="ln"+i;
+    e.id="la"+(i);
+    n.id="ln"+(i);
     n.className="far fa-times-circle"
     // list.appendChild(ins.x);
     //var ins = document.createElement("li");
@@ -149,13 +153,17 @@ function addli(a,a1,q){
       var y12="ln"+(q);
       var s=document.getElementById(y1).nextSibling.nextSibling.nextSibling.nextSibling;
       console.log(s);
+      console.log(document.getElementById("la0"));
       var y=document.getElementById(y1);
-      var y01=document.getElementById(y1).nextSibling;
-      var y02=document.getElementById(y1).previousSibling;
-      var y03=document.getElementById(y1).nextSibling.nextSibling;
+      var y01=document.getElementById(y12);
+      var y02=document.getElementById(y11);
+      var y03=document.getElementById(y12).nextSibling;
+      
+      console.log(document.getElementById("ln0"));
+      console.log(document.getElementById("ln0").nextSibling);
       var z3= document.getElementById(y12).nextSibling.nextSibling.nextSibling.nextSibling;
       var z1 =document.getElementById(y11).nextSibling.nextSibling.nextSibling.nextSibling;
-      console.log(y03);
+      console.log(z3);
       list.removeChild(y02);
       list.removeChild(y01);
       list.removeChild(y);
@@ -168,7 +176,7 @@ function addli(a,a1,q){
      y.removeEventListener("click",hi );
      y.removeEventListener("blur", hi);
      y.removeEventListener("keypress",hi );
-     y03.removeEventListener("click",hi);
+     y01.removeEventListener("click",hi);
      var s1=[];
      for(var d=0;d<i-q;d++)
      {var j=s.id;
@@ -190,7 +198,6 @@ function addli(a,a1,q){
      {var j=z3.id;
         var sd = z3.id.charAt(2);
         var sdd= parseInt(sd) +1;
-        console.log(j);
        z3.id = "ln"+(sd-1);
        z3=document.getElementById("ln"+sdd); 
      }
@@ -204,7 +211,8 @@ function addli(a,a1,q){
 
 function addel(){
    // console.log(this.value);
-  this.className="foc";
+//   this.className="foc";
+this.setAttribute("style","background-color:grey");
     if(this.id.charAt(2) == (i) && this.value !="")
     {//console.log("hi")
        // this.className="foc";
@@ -213,11 +221,15 @@ function addel(){
 }
 function remel(){
     console.log(this);
-    this.className="uc";
+    // app();
+    //addli(1,0,i)
+    //this.className="uc";
+    this.setAttribute("style","background-color:white");
     if(this.value == "" && this.id.charAt(2) != (i-1))
     {//console.log("n odoubt");
     var z = this.id.charAt(2);
-        addli(0,1,z)
+        addli(0,1,z);
+
     }
 }
 function hi(){
@@ -229,8 +241,9 @@ function icon(){
     console.log(df.value);
     if (df.value != "") {
        //this.className = "far fa-check-square";
+       if(this.className=="fas fa-plus")
        this.className ="far fa-square";
-       df.className = "le";
+       this.setAttribute("style","background-color:white");
 
     }
     // if (df.value =="")
@@ -248,11 +261,15 @@ function ican(){
        //this.className = "far fa-check-square";
      this.className ="far fa-square";
      df.className = "le";
+     if(btnn ==0)
+     ap();
     }
     else if (this.className =="far fa-square")
     {
         this.className = "far fa-check-square";
         df.className = "lc";
+        if(btnn ==0)
+        ap();
     }
     
 }
@@ -269,15 +286,19 @@ function high(){
 }
 function remm(){
     var z= this.id.charAt(2);
-    if(z!=i-1)
-    addli(0,1,z);
-   if(z==i-1 && z!=0)
-   addli(0,0,z);
-   if(z==0){
-    for (let sa = 1; sa < 5; sa++) {
-      list.removeChild(list.childNodes[sa]); 
+    if(z==0 && i==1){
+        for (let sa = 1; sa < 5; sa++) {
+          list.removeChild(list.childNodes[sa]);  
      }
   }
+
+   if(z!=i-1)
+   addli(0,1,z);
+   else if(z==i-1 && z!=0)
+   addli(0,0,z);
+    
+    if(btnn==0) ap();
+  
 }
 function swap(a,b){
     var aa1=list.childNodes[4*a+1].className;
@@ -293,12 +314,24 @@ function swap(a,b){
 
 }
 function ap() {
+ if(i>2){
    var last="li"+(i-1);
-   if(i!=0)
+   if(i!=0){
    if(document.getElementById(last).value == "")
-       addli(0,0,i-1);
-       console.log("hi");
+       {addli(0,0,i-1);
+       console.log("hi");}
+   else{
+        var las ="la"+(i-1) ;
+        if(document.getElementById(las).className=="fas fa-plus")
+        document.getElementById(las).className="far fa-square";
+      }    
      
+    app(); 
+
+   }
+} 
+ }      
+function app(){
     for (let a = 0; a < i-1; a++) {
         for (let b = 0; b < i-a-1; b++) {
             var c=document.getElementById("li"+b).className
@@ -308,10 +341,26 @@ function ap() {
             
         }
         
-    }   
+    }  
+}
+ function slid(){
+     if(this.id =="on") {
+         this.id="off";
+         btnn=1;
+         btn.id="onn"
+         btn.addEventListener("click",ap)
+      }
 
+     else if(this.id =="off"){
+         this.id = "on";
+         btnn=0;
+         btn.id="of";
+         btn.removeEventListener("click",ap);
+         console.log(this);
+        ap();
+     }
 
- }      
+ }
 // function addl(ins,x){
     
 //     list.appendChild(x);
